@@ -15,6 +15,17 @@ public class EasyLevel implements Levels {
     if (oddOrEven.equals("EVEN")) {
       if (total % 2 == 0) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), oddOrEven, playerName);
+      } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            Integer.toString(total), oddOrEven, ai.getAiName());
+      }
+    }
+    if (oddOrEven.equals("ODD")) {
+      if (total % 2 != 0) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), oddOrEven, playerName);
+      } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+            Integer.toString(total), oddOrEven, ai.getAiName());
       }
     }
   }
