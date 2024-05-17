@@ -12,20 +12,19 @@ public class EasyLevel implements Levels {
     int aiFingers = ai.getFinger();
     MessageCli.PRINT_INFO_HAND.printMessage(ai.getAiName(), Integer.toString(aiFingers));
     total = playerFingers + aiFingers;
-    if (oddOrEven.equals("EVEN")) {
-      if (total % 2 == 0) {
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), oddOrEven, playerName);
+    if (total % 2 == 0) {
+      if (oddOrEven.equals("EVEN")) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), "EVEN", playerName);
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
-            Integer.toString(total), oddOrEven, ai.getAiName());
+            Integer.toString(total), "EVEN", ai.getAiName());
       }
     }
-    if (oddOrEven.equals("ODD")) {
-      if (total % 2 != 0) {
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), oddOrEven, playerName);
+    if (total % 2 != 0) {
+      if (oddOrEven.equals("ODD")) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), "ODD", playerName);
       } else {
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(
-            Integer.toString(total), oddOrEven, ai.getAiName());
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), "ODD", ai.getAiName());
       }
     }
   }
