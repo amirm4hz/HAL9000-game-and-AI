@@ -5,6 +5,8 @@ public class LevelsFactory {
     switch (levelType.toUpperCase()) {
       case "EASY":
         return new EasyLevel();
+      case "MEDIUM":
+        return new MediumLevel();
       default:
         return null;
     }
