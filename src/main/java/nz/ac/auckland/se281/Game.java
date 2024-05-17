@@ -8,14 +8,13 @@ public class Game {
 
   private int roundNumber = 1;
   private String playerName;
-  private Difficulty difficulty;
-  private Choice choice;
+  private String choice;
   private Levels level;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     LevelsFactory levelsFactory = new LevelsFactory();
-    this.choice = choice;
+    this.choice = choice.toString();
     this.level =
         levelsFactory.createLevel(difficulty.toString()); // Pass the difficulty as a string
     this.playerName = options[0];
@@ -39,7 +38,7 @@ public class Game {
       }
     }
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(fingers));
-    level.play(fingers); // Pass the Choice object to the play() method
+    level.play(fingers, choice, playerName); // Pass the Choice object to the play() method
   }
 
   public void endGame() {}
