@@ -14,11 +14,13 @@ public class Game {
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     this.choice = choice.toString();
+    this.playerName = options[0];
     this.level = LevelsFactory.createLevel(difficulty.toString());
     if (this.level instanceof MediumLevel) {
       ((MediumLevel) this.level).resetGame();
+    } else if (this.level instanceof HardLevel) {
+      ((HardLevel) this.level).resetGame();
     }
-    this.playerName = options[0];
   }
 
   public void play() {
