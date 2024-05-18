@@ -13,10 +13,11 @@ public class Game {
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
-    LevelsFactory levelsFactory = new LevelsFactory();
     this.choice = choice.toString();
-    this.level =
-        levelsFactory.createLevel(difficulty.toString()); // Pass the difficulty as a string
+    this.level = LevelsFactory.createLevel(difficulty.toString());
+    if (this.level instanceof MediumLevel) {
+      ((MediumLevel) this.level).resetGame();
+    }
     this.playerName = options[0];
   }
 

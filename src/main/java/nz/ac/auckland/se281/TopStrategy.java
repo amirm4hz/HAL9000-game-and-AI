@@ -4,6 +4,11 @@ public class TopStrategy implements Strategy {
 
   private int oddCount = 0;
   private int evenCount = 0;
+  private String gameCondition;
+
+  public void setGameCondition(String gameCondition) {
+    this.gameCondition = gameCondition;
+  }
 
   public void updateCounts(int playerFingers) {
     if (Utils.isEven(playerFingers)) {
@@ -21,12 +26,22 @@ public class TopStrategy implements Strategy {
   @Override
   public int getFinger() {
     int aiFingers = 0;
-    if (oddCount > evenCount) {
-      aiFingers = Utils.getRandomEvenNumber();
-    } else if (evenCount > oddCount) {
-      aiFingers = Utils.getRandomOddNumber();
-    } else {
-      Utils.getRandomNumberRange(0, 5);
+    if (gameCondition.equals("ODD")) {
+      if (oddCount > evenCount) {
+        aiFingers = Utils.getRandomOddNumber();
+      } else if (evenCount > oddCount) {
+        aiFingers = Utils.getRandomEvenNumber();
+      } else {
+        aiFingers = Utils.getRandomNumberRange(0, 5);
+      }
+    } else if (gameCondition.equals("EVEN")) {
+      if (oddCount > evenCount) {
+        aiFingers = Utils.getRandomEvenNumber();
+      } else if (evenCount > oddCount) {
+        aiFingers = Utils.getRandomOddNumber();
+      } else {
+        aiFingers = Utils.getRandomNumberRange(0, 5);
+      }
     }
     return aiFingers;
   }
