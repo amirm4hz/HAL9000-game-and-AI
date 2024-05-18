@@ -17,6 +17,10 @@ public class Ai {
     return strategy.getFinger();
   }
 
+  public Strategy getStrategy(){
+    return this.strategy;
+  }
+
   public void setStrategy(Strategy strategy) {
     this.strategy = strategy;
   }
