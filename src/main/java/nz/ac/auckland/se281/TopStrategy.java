@@ -6,11 +6,22 @@ public class TopStrategy implements Strategy {
   private int evenCount = 0;
   private String gameCondition;
 
+  /**
+   * Sets the game condition.
+   *
+   * @param gameCondition the game condition
+   */
   public void setGameCondition(String gameCondition) {
-    this.gameCondition = gameCondition;
+    this.gameCondition = gameCondition; // set the game condition
   }
 
+  /**
+   * Updates the counts of the player based on the number of fingers shown.
+   *
+   * @param playerFingers the number of fingers shown by the player
+   */
   public void updateCounts(int playerFingers) {
+    // update the counts of the player based on the number of fingers shown
     if (Utils.isEven(playerFingers)) {
       evenCount++;
     } else {
@@ -18,14 +29,25 @@ public class TopStrategy implements Strategy {
     }
   }
 
+  /** Resets the counts of the player. */
   public void resetCounts() {
+    // reset the counts of the player
     oddCount = 0;
     evenCount = 0;
   }
 
+  /**
+   * Returns the number of fingers to show in the game. The AI will play an odd number if the game
+   * condition is ODD and the count of odd numbers is greater than the count of even numbers, and
+   * vice versa.
+   *
+   * @return the number of fingers to show
+   */
   @Override
   public int getFinger() {
     int aiFingers = 0;
+    // if the game condition is ODD, the AI will play an odd number
+    // if the count of odd numbers is greater than the count of even numbers and vice versa
     if (gameCondition.equals("ODD")) {
       if (oddCount > evenCount) {
         aiFingers = Utils.getRandomOddNumber();
