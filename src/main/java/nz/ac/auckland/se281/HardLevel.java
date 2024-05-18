@@ -63,42 +63,43 @@ public class HardLevel implements Levels {
       ai.setGameCondition(oddOrEven);
       int aiFingers = ai.getFinger();
       MessageCli.PRINT_INFO_HAND.printMessage(ai.getAiName(), Integer.toString(aiFingers));
-      total = playerFingers + aiFingers;
+      total = playerFingers + aiFingers; // calculate the total number of fingers
       if (Utils.isEven(total)) {
-        if (oddOrEven.equals("EVEN")) {
+        if (oddOrEven.equals("EVEN")) { // check if the player chose even
           MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), "EVEN", playerName);
           winner = "Player";
-        } else {
+        } else { // the player chose odd
           MessageCli.PRINT_OUTCOME_ROUND.printMessage(
               Integer.toString(total), "EVEN", ai.getAiName());
           winner = "AI";
         }
-      } else {
-        if (oddOrEven.equals("ODD")) {
+      } else { // the total number of fingers is odd
+        if (oddOrEven.equals("ODD")) { // check if the player chose odd
           MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), "ODD", playerName);
           winner = "Player";
-        } else {
+        } else { // the player chose even
           MessageCli.PRINT_OUTCOME_ROUND.printMessage(
               Integer.toString(total), "ODD", ai.getAiName());
           winner = "AI";
         }
       }
+      // update the counts for the AI's top strategy
       ai.updateCounts(playerFingers);
     } else if (ai.getStrategy() instanceof RandomStrategy) {
       easyLevel.play(playerFingers, oddOrEven, playerName);
-      String result = easyLevel.getWinner();
-      setWinner(result);
+      String result = easyLevel.getWinner(); // get the winner of the round
+      setWinner(result); // set the winner of the round
       ai.updateCounts(playerFingers);
       winOrNot(playerFingers, playerFingers, oddOrEven);
-      strategy = ai.getStrategy();
+      strategy = ai.getStrategy(); // get the strategy of the AI
     }
-    if (wonRound) {
+    if (wonRound) { // check if the AI won the round
       ai.setStrategy(strategy);
-    } else if (!wonRound) {
+    } else if (!wonRound) { // the AI lost the round
       if (strategy instanceof TopStrategy) {
         ai.setStrategy(new RandomStrategy());
       } else if (strategy instanceof RandomStrategy) {
-        ai.setStrategy(new RandomStrategy());
+        ai.setStrategy(new RandomStrategy()); // set the strategy of the AI to random
       }
     }
   }

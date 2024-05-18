@@ -70,7 +70,7 @@ public class Ai {
    * @return the strategy of the Ai
    */
   public Strategy getStrategy() {
-    return this.strategy; // return the strategy
+    return this.strategy;
   }
 
   /**
