@@ -16,6 +16,7 @@ public class Game {
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     gameCreated = true;
+    roundNumber = 1;
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     this.choice = choice.toString();
     this.playerName = options[0];
@@ -63,6 +64,18 @@ public class Game {
       return;
     }
     gameCreated = false;
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        playerName, Integer.toString(playerWins), Integer.toString(aiWins));
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        "HAL-9000", Integer.toString(aiWins), Integer.toString(playerWins));
+
+    if (playerWins > aiWins) {
+      MessageCli.PRINT_END_GAME.printMessage(playerName);
+    } else if (aiWins > playerWins) {
+      MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
+    } else {
+      MessageCli.PRINT_END_GAME_TIE.printMessage();
+    }
   }
 
   public void showStats() {
