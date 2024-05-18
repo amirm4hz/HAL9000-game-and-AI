@@ -9,7 +9,11 @@ public class TopStrategy implements Strategy {
   /**
    * Sets the game condition.
    *
-   * @param gameCondition the game condition
+   * <p>The game condition determines the strategy that the AI will use to play the game. If the
+   * game condition is "ODD", the AI will try to make the total number of fingers shown odd. If the
+   * game condition is "EVEN", the AI will try to make the total number of fingers shown even.
+   *
+   * @param gameCondition the game condition, which should be either "ODD" or "EVEN"
    */
   public void setGameCondition(String gameCondition) {
     this.gameCondition = gameCondition; // set the game condition
