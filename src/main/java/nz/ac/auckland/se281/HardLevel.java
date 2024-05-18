@@ -7,9 +7,18 @@ public class HardLevel implements Levels {
   private EasyLevel easyLevel = new EasyLevel();
   private Ai ai;
   private int total = 0;
+  private String winner;
 
   public HardLevel() {
     this.ai = new Ai(new TopStrategy());
+  }
+
+  public String getWinner() {
+    return winner;
+  }
+
+  public void setWinner(String winner) {
+    this.winner = winner;
   }
 
   public void resetGame() {
@@ -21,6 +30,8 @@ public class HardLevel implements Levels {
     roundNumber++;
     if (roundNumber <= 3) {
       easyLevel.play(playerFingers, oddOrEven, playerName);
+      String result = easyLevel.getWinner();
+      setWinner(result);
       ai.updateCounts(playerFingers);
       winOrNot(playerFingers, playerFingers, oddOrEven);
       strategy = ai.getStrategy();
@@ -34,21 +45,27 @@ public class HardLevel implements Levels {
       if (Utils.isEven(total)) {
         if (oddOrEven.equals("EVEN")) {
           MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), "EVEN", playerName);
+          winner = "Player";
         } else {
           MessageCli.PRINT_OUTCOME_ROUND.printMessage(
               Integer.toString(total), "EVEN", ai.getAiName());
+          winner = "AI";
         }
       } else {
         if (oddOrEven.equals("ODD")) {
           MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), "ODD", playerName);
+          winner = "Player";
         } else {
           MessageCli.PRINT_OUTCOME_ROUND.printMessage(
               Integer.toString(total), "ODD", ai.getAiName());
+          winner = "AI";
         }
       }
       ai.updateCounts(playerFingers);
     } else if (ai.getStrategy() instanceof RandomStrategy) {
       easyLevel.play(playerFingers, oddOrEven, playerName);
+      String result = easyLevel.getWinner();
+      setWinner(result);
       ai.updateCounts(playerFingers);
       winOrNot(playerFingers, playerFingers, oddOrEven);
       strategy = ai.getStrategy();

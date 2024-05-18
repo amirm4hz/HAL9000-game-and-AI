@@ -6,9 +6,18 @@ public class MediumLevel implements Levels {
   private int roundNumber = 0;
   private int total = 0;
   private EasyLevel easyLevel = new EasyLevel();
+  private String winner;
 
   public MediumLevel() {
     this.ai = new Ai(new TopStrategy());
+  }
+
+  public String getWinner() {
+    return winner;
+  }
+
+  public void setWinner(String winner) {
+    this.winner = winner;
   }
 
   public void resetGame() {
@@ -20,6 +29,8 @@ public class MediumLevel implements Levels {
     roundNumber++;
     if (roundNumber <= 3) {
       easyLevel.play(playerFingers, oddOrEven, playerName);
+      String result = easyLevel.getWinner();
+      setWinner(result);
       ai.updateCounts(playerFingers);
       return;
     }
@@ -31,15 +42,19 @@ public class MediumLevel implements Levels {
     if (Utils.isEven(total)) {
       if (oddOrEven.equals("EVEN")) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), "EVEN", playerName);
+        winner = "Player";
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(
             Integer.toString(total), "EVEN", ai.getAiName());
+        winner = "AI";
       }
     } else {
       if (oddOrEven.equals("ODD")) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), "ODD", playerName);
+        winner = "Player";
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(total), "ODD", ai.getAiName());
+        winner = "AI";
       }
     }
     ai.updateCounts(playerFingers);

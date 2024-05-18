@@ -10,8 +10,12 @@ public class Game {
   private String playerName;
   private String choice;
   private Levels level;
+  private boolean gameCreated = false;
+  private int aiWins = 0;
+  private int playerWins = 0;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
+    gameCreated = true;
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     this.choice = choice.toString();
     this.playerName = options[0];
@@ -24,6 +28,10 @@ public class Game {
   }
 
   public void play() {
+    if (!gameCreated) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
     MessageCli.START_ROUND.printMessage(Integer.toString(roundNumber));
     roundNumber++;
     int fingers = -1;
@@ -42,9 +50,30 @@ public class Game {
     }
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, Integer.toString(fingers));
     level.play(fingers, choice, playerName); // Pass the Choice object to the play() method
+    if (level.getWinner().equals("AI")) {
+      aiWins++;
+    } else if (level.getWinner().equals("Player")) {
+      playerWins++;
+    }
   }
 
-  public void endGame() {}
+  public void endGame() {
+    if (!gameCreated) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+    gameCreated = false;
+  }
 
-  public void showStats() {}
+  public void showStats() {
+    if (!gameCreated) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        playerName, Integer.toString(playerWins), Integer.toString(aiWins));
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        "HAL-9000", Integer.toString(aiWins), Integer.toString(playerWins));
+  }
 }
