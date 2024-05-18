@@ -7,6 +7,8 @@ public class LevelsFactory {
         return new EasyLevel();
       case "MEDIUM":
         return new MediumLevel();
+      case "HARD":
+        return new HardLevel();
       default:
         return null;
     }
