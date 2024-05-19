@@ -53,7 +53,7 @@ public class Game {
     int fingers = -1;
     // Get the number of fingers from the player
     while (fingers < 0 || fingers > 5) {
-      System.out.println("Give <fingers> and press enter");
+      MessageCli.ASK_INPUT.printMessage();
       String input = Utils.scanner.nextLine();
       try {
         fingers = Integer.parseInt(input);
